@@ -12,6 +12,11 @@ import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import java.awt.TextArea;
+import javax.swing.JButton;
+import javax.swing.AbstractAction;
+import java.awt.event.ActionEvent;
+import javax.swing.Action;
+import java.awt.event.ActionListener;
 
 public class GUI {
 
@@ -20,6 +25,7 @@ public class GUI {
 	private JTextField textField_1;
 	private JTextField textField_3;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private final Action action = new SwingAction();
 
 	/**
 	 * Launch the application.
@@ -49,7 +55,7 @@ public class GUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 586, 360);
+		frame.setBounds(100, 100, 586, 426);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
@@ -118,5 +124,27 @@ public class GUI {
 		TextArea textArea = new TextArea();
 		textArea.setBounds(134, 140, 343, 141);
 		panel_1.add(textArea);
+		
+		JButton btnSumbit = new JButton("Submit");
+		btnSumbit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		btnSumbit.setAction(action);
+		btnSumbit.setBounds(134, 306, 89, 23);
+		panel_1.add(btnSumbit);
+		
+		JButton btnClear = new JButton("Clear");
+		btnClear.setBounds(388, 306, 89, 23);
+		panel_1.add(btnClear);
+	}
+	private class SwingAction extends AbstractAction {
+		public SwingAction() {
+			putValue(NAME, "Submit");
+			putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+		}
 	}
 }
