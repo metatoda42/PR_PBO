@@ -15,6 +15,28 @@
 				"url": "jdbc:mysql://localhost:3306/sekolah",
 				"home": "mysql_client",
 				"type": "dev",
+				"auth-model": "native"
+			}
+		},
+		"mysql8-17683375631-b89d901ec56937a": {
+			"provider": "mysql",
+			"driver": "mysql8",
+			"name": "sekolah 2",
+			"save-password": true,
+			"navigator-show-only-entities": true,
+			"navigator-hide-folders": true,
+			"navigator-hide-virtual": true,
+			"read-only": false,
+			"configuration": {
+				"host": "localhost",
+				"port": "3306",
+				"database": "sekolah",
+				"url": "jdbc:mysql://localhost:3306/sekolah",
+				"home": "mysql_client",
+				"type": "dev",
+				"properties": {
+					"connectTimeout": "20000"
+				},
 				"auth-model": "native",
 				"handlers": {}
 			}

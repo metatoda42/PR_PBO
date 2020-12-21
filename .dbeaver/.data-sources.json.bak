@@ -6,9 +6,7 @@
 			"driver": "mysql8",
 			"name": "sekolah",
 			"save-password": true,
-			"navigator-show-only-entities": true,
-			"navigator-hide-folders": true,
-			"navigator-hide-virtual": true,
+			"show-system-objects": true,
 			"read-only": false,
 			"configuration": {
 				"host": "localhost",
