@@ -1,18 +1,27 @@
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 public class konek {
-    public static Connection getConnection(){
-        Connection con = null;
+    Connection con;
+    Statement stm;
+   // jdbc:mysql://localhost/db
+    public void config(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/sekolah", "root", "");
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "koneksi1 gagal "+e.getMessage());
         }
-        
-        return con;
+        try {
+            con=DriverManager.getConnection("jdbc:mysql://localhost/sekolah?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "koneksi2 gagal "+e.getMessage());
+        }
+        try {
+            stm = con.createStatement();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "koneksi3 gagal "+e.getMessage());
+        }
     }
-}    
-
-
-
+}

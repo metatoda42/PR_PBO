@@ -1,12 +1,8 @@
 import java.awt.EventQueue;
-import java.sql.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import javax.swing.JTextArea;
-import java.awt.GridLayout;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
@@ -17,17 +13,23 @@ import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
 import javax.swing.Action;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 
-public class GUI {
+public class GUI extends Register {
+	
+	
 
 	private JFrame frame;
 	private JTextField NIS;
 	private JTextField Nama;
 	private JTextField Jurusan;
 	private final ButtonGroup Jekel = new ButtonGroup();
-	private final Action btnSubmit = new SwingAction();
 	private final Action action = new SwingAction();
+	String v1, v2, v3, v5;
+	char v4;
+	private final Action action_1 = new SwingAction_1();
+	private final Action action_2 = new SwingAction_2();
 
 	/**
 	 * Launch the application.
@@ -112,26 +114,47 @@ public class GUI {
 		panel_1.add(lblAlamat);
 		
 		JRadioButton L = new JRadioButton("Laki-Laki");
+		L.setAction(action_1);
 		L.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		Jekel.add(L);
 		L.setBounds(134, 77, 147, 23);
 		panel_1.add(L);
 		
 		JRadioButton P = new JRadioButton("Perempuan");
+		P.setAction(action_2);
 		P.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		Jekel.add(P);
 		P.setBounds(283, 77, 147, 23);
 		panel_1.add(P);
+	    
+		Jekel.add(L);
+		Jekel.add(P);
+		
+
+		
+
 		
 		final TextArea Alamat = new TextArea();
 		Alamat.setBounds(134, 140, 343, 141);
 		panel_1.add(Alamat);
 		
+		
 		JButton btnSumbit = new JButton("Submit");
 		btnSumbit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				StringBuilder query = new StringBuilder();
-				query.append("INSERT INTO `siswa` (``, `Nama`, `Jurusan`, 'L', `Alamat`) VALUES ('"+NIS+"', '"+Nama+"', '"+Jurusan+"', '"+Jekel+"', '"+Alamat+"')\n");
+				v1=NIS.getText();
+				v2=Nama.getText();
+				v3=Jurusan.getText();
+				v5=Alamat.getText();
+				
+				sql="INSERT INTO `siswa` (`NIS`, `Nama`, `Jurusan`, `JK`, `Alamat`) VALUES ('"+v1+"', '"+v2+"', '"+v3+"', '"+v4+"', '"+v5+"')";
+				
+				java.sql.PreparedStatement pst;
+				try {
+					pst = con.prepareStatement(sql);
+					pst.execute();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnSumbit.setAction(action);
@@ -143,11 +166,41 @@ public class GUI {
 		panel_1.add(btnClear);
 	}
 	private class SwingAction extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		public SwingAction() {
-			putValue(NAME, "SwingAction");
+			putValue(NAME, "Submit");
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
 		public void actionPerformed(ActionEvent e) {
+		}
+	}
+	private class SwingAction_1 extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public SwingAction_1() {
+			putValue(NAME, "Laki-Laki");
+			putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+			v4='L';
+		}
+	}
+	private class SwingAction_2 extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public SwingAction_2() {
+			putValue(NAME, "Perempuan");
+			putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+			v4='P';
 		}
 	}
 }
