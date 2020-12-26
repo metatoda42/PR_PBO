@@ -1,10 +1,10 @@
 import java.sql.*;
 	public class Register extends konek {
 	    // deklarasi
-	    Connection con;
+	    static Connection con;
 	    Statement stat;
-	    ResultSet rs;
-	    String sql;
+	    static ResultSet rs;
+	    static String sql;
 	    
 	    public Register() {
 	        //pemanggilan fungsi koneksi database yang sudah kita buat pada class koneksi.java
